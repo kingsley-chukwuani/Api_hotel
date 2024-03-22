@@ -1,10 +1,29 @@
 const mongoose = require('mongoose');
 
 const roomSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   name: String,
-  roomType: { type: mongoose.Schema.Types.ObjectId, ref: 'RoomType' },
   price: Number
 });
 
-module.exports = mongoose.model('Room', roomSchema);
+const Room = mongoose.model('Room', roomSchema);
+
+const roomsData = [
+  {
+    name: 'Deluxe Room',
+    price: 20000
+  },
+  {
+    name: 'Standard Room',
+    price: 10000
+  },
+  {
+    name: 'Economy Room',
+    price: 5000,
+  }
+];
+
+Room.create(roomsData)
+  .then(() => console.log('Rooms created successfully'))
+  .catch(err => console.error(err));
+
+module.exports = Room;
